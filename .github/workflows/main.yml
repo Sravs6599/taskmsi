@@ -15,11 +15,11 @@ jobs:
 
     - name: Create Directory
       run: |
-        powershell -Command "New-Item -Path 'D:\msifile' -ItemType Directory -Force"
+        powershell -Command "New-Item -Path 'D:\msifilestore' -ItemType Directory -Force"
 
     - name: Download Firefox MSI
       run: |
-        powershell -Command "Invoke-WebRequest -Uri 'https://www.exemsi.com/downloads/packages/Firefox/Firefox%20Setup%2014.0.1.msi' -OutFile 'D:\msifile\FirefoxSetup.msi'"
+        powershell -Command "Invoke-WebRequest -Uri 'https://www.exemsi.com/downloads/packages/Firefox/Firefox%20Setup%2014.0.1.msi' -OutFile 'D:\msifilestore\FirefoxSetup.msi'"
 
    
   
