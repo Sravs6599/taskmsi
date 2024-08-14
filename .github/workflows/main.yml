@@ -7,11 +7,15 @@ on:
 
 jobs:
   install-msi:
-    runs-on: self-hosted
+    runs-on: windows-latest
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
+
+    - name: Set PowerShell Execution Policy
+      run: |
+        Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force
 
     - name: Download Firefox MSI
       run: |
@@ -21,5 +25,10 @@ jobs:
       run: |
         msiexec.exe /i "$env:USERPROFILE\Downloads\FirefoxSetup.msi" /quiet /norestart
 
-   
-
+    - name: Verify Installation
+      run: |
+        if (Test-Path "C:\Program Files (x86)\Mozilla Firefox") {
+          Write-Output "Installation Successful!"
+        } else {
+          throw "Installation failed!"
+        }
