@@ -23,7 +23,7 @@ jobs:
 
     - name: Install Firefox MSI
       run: |
-        powershell -Command "Start-Process msiexec.exe -ArgumentList '/i', 'D:\msifile\FirefoxSetup.msi', '/quiet', '/norestart' -NoNewWindow -Wait"
+        powershell -Command "Start-Process msiexec /i "D:\msifile\FirefoxSetup.msi" /qn"
 
     - name: Verify Installation
       run: |
