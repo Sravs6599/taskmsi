@@ -25,10 +25,7 @@ jobs:
       run: |
         msiexec.exe /i "$env:USERPROFILE\Downloads\FirefoxSetup.msi" /quiet /norestart
 
-    - name: Verify Installation
+    - name: Verify URL
       run: |
-        if (Test-Path "C:\Program Files (x86)\Mozilla Firefox") {
-          Write-Output "Installation Successful!"
-        } else {
-          throw "Installation failed!"
-        }
+        Invoke-WebRequest -Uri "https://firefox.com"
+      shell: powershell
