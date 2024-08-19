@@ -13,13 +13,22 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Create Directory
+    - name: Set PowerShell Execution Policy
       run: |
-        powershell -Command "New-Item -Path 'D:\msifilestore' -ItemType Directory -Force"
+        Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force
 
     - name: Download Firefox MSI
       run: |
-        powershell -Command "Invoke-WebRequest -Uri 'https://www.exemsi.com/downloads/packages/Firefox/Firefox%20Setup%2014.0.1.msi' -OutFile 'D:\msifilestore\FirefoxSetup.msi'"
+        Invoke-WebRequest -Uri "https://www.exemsi.com/downloads/packages/Firefox/Firefox%20Setup%2014.0.1.msi" -OutFile "$env:USERPROFILE\Downloads\FirefoxSetup.msi"
 
-   
-  
+    - name: Install Firefox MSI
+      run: |
+        msiexec.exe /i "$env:USERPROFILE\Downloads\FirefoxSetup.msi" /quiet /norestart
+
+    - name: Verify Installation
+      run: |
+        if (Test-Path "C:\Program Files (x86)\Mozilla Firefox") {
+          Write-Output "Installation Successful!"
+        } else {
+          throw "Installation failed!"
+        }
