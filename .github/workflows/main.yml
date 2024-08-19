@@ -27,5 +27,5 @@ jobs:
 
     - name: Verify URL
       run: |
-        Invoke-WebRequest -Uri "https://firefox.com"
+        Invoke-WebRequest -Uri "https://www.exemsi.com/downloads/packages/Firefox/Firefox%20Setup%2014.0.1.msi"
       shell: powershell
